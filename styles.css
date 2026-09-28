@@ -98,3 +98,65 @@ body {
   border: 0;
   border-radius: var(--radius);
 }
+
+.feedback {
+  margin: var(--sp-2) 0;
+  font-size: 0.875rem;
+  color: var(--danger);
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;    /* did the main aziz the vert one so i can stack the tasks */
+  gap: var(--sp-2);          
+  margin: 0;
+  padding: 0;               
+}
+
+.task {                      /* designing the only link + something i noticed that when i made it flex container it removes the bullet alone and did some basic styling */
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.task-title {
+  flex: 1;                 
+  min-width: 0;
+}
+
+.done .task-title {          /* this is for the title inside the class */
+  text-decoration: line-through;  /* as mentioned in the instruction of the assignment u mentioned "Users can mark a task as complete/incomplete (visually distinct, e.g. strikethrough) 
+  so thats why i made some text with a line crossing them as completed*/
+  color: var(--muted);
+}
+
+/* did the same look for those 2 buttons */
+.toggle,
+.delete {
+  padding: var(--sp-1) var(--sp-2);
+  font-family: var(--font);
+  font-size: 0.875rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.toggle {
+  color: var(--success);
+}
+
+.delete {
+  color: var(--danger);
+}
+
+.empty-state {
+  color: var(--muted);
+}
+
+.invalid {                   /* as i said in index.html js will handle the errors + the color i chose red since its a mistake it should be noticed */
+  border-color: var(--danger);
+} 
