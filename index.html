@@ -9,6 +9,26 @@
 </head>
 <body>
   <main class="app">
+    
+ <header class="app-header">
+      <h1>My Tasks</h1> <!-- first head like usual-->
+      <p class="counter" id="counter">0 of 0 tasks done</p>  <!-- i will use this as a counte of done tasks so in js i will make this count -->
+    </header>
+
+    <form class="task-form" id="task-form">           <!-- a form just like assignment 2 to fill our tasks instead of name,message like before but same concept-->
+      <label for="task-input">New task</label>        
+      <div class="form-row">
+        <input type="text" id="task-input" class="task-input" placeholder="e.g. Finish assignment 3"> <!--given it a type so he should enter this type
+        of input id and class for later and a placeholder which i didnt use in my last assignment its just like a recomdation/exemple that shows in the box
+        in lighter color before you type anything-->
+        <button type="submit" class="add">Add</button>
+      </div>
+    </form>
+
+    <p class="feedback" id="feedback"></p>             <!-- its empty sincec i will use js to handle the errors so i just gave the p class and id to link-->
+    <ul class="task-list" id="task-list"></ul>         <!-- same for this unordered list i will handle it in js -->
+    <p class="empty-state" id="empty-state">No tasks yet ,add your first one above.</p>
+
   </main>
 
   <script src="script.js"></script> <!--i put this in the end so html exists before js run-->
