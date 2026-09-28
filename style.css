@@ -1,0 +1,36 @@
+/* same systeme for the comments here i will comment new/nonbasic stuff*/
+:root {
+  --surface: #f5f6fa;   /* this is for the page background*/
+  --panel: #ffffff;     /* this for the cards and input */
+  --text: #1f2330;      /* the text of the body*/
+  --muted: #5f6675;     /* secondary text */
+  --border: #dde1ea;    /* lines of the cards */
+  --brand: #3b5bdb;     /* the main buttons this color */
+  --success: #2f9e44;   /* done button hover */
+  --danger: #e03131;    /* for errors or delete i made them red to be careful before pressing*/
+
+  --sp-1: 4px;          /* the spacing scale i used the same as last assignment*/
+  --sp-2: 8px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
+  --sp-6: 48px;
+
+  --radius: 10px;
+  --font: system-ui, sans-serif;  /* also like always font and a fallback font in case it doesnt load or anything*/
+}
+
+
+* {
+  box-sizing: border-box;  /* also like last assignment this means the width include border and the padding they are not added to it */
+}
+
+body {
+  margin: 0;               /* removing the browser default margin so i can fully control it */
+  padding: var(--sp-5) var(--sp-3);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;        /* in the slides this is the recommended line height for body text so i used it */
+  color: var(--text);
+  background: var(--surface);
+}
