@@ -126,3 +126,13 @@ function loadTasks() {                                  // the goal of this func
     return [];                                          // and it will start with an empty list instead of crashing
   }                                                     
 }                                                       
+
+function updateTasks(nextTasks) {                       // every change to the list goes through this function
+  tasks = nextTasks;                                    // here we are replacing th old array with a new one
+  saveTasks();                                          // it is saved to localstorage handled above
+  renderTasks();                                        // redraws the page
+}                                                       
+
+tasks = loadTasks();                                    // here it loads saved tasks first
+renderTasks();                                          // and that draws the list when the page opens
+
