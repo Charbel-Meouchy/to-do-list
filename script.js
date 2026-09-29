@@ -37,6 +37,14 @@ function taskToListItem(task) {
   return li;                                           // gives the finished <li> back
 }                                                      // and thas closing tag puts an end to taskToListItem
 
+function updateCounter() {                              // this updates the -of- done text
+  const doneCount = tasks.reduce(                       // this walk through the task to keep count
+    (count, t) => t.done ? count + 1 : count,           // so  if the task is done we add 1 to the number of done tasks
+    0                                                   // ofcourse the count will start at 0
+  );                                                    
+  counter.textContent = `${doneCount} of ${tasks.length} done`; // this is the format that write x of y done (exemple x and y are numbers)
+}                                                       
+
 function renderTasks() {                              
   list.innerHTML = '';                                 // emptiying the <ul> so nothing duplicate by accident
   tasks                                                // start from the tasks array
@@ -44,15 +52,9 @@ function renderTasks() {
     .forEach(li => list.append(li));                   // adds each <li> to the <ul>
   emptyState.textContent = tasks.length === 0          // checks if there are zero tasks to show the message i mentioned before that is underneath this line
     ? 'No tasks yet — add your first one above.'       
-    : '';                                              // and if not empty show nothing since there will be tasks
+    : '';   
+    updateCounter();                                 // i added this at the end of the code which will refresh the timer                                           // and if not empty show nothing since there will be tasks
 }                                                      
-
-renderTasks();                                         // and finally this draws the list when the page open
-
-function updateTasks(nextTasks) {                       // i named this update since everychange in the tasks will go through here
-  tasks = nextTasks;                                    // this replaces the old array with new updated one
-  renderTasks();                                        // draw the page again with the new changes
-}                                                       
 
 function addTask(title) {                               // adds a new task with the typed text like added a gym one it shows with the text gym
   const newTask = {                                     // creating the new task object
@@ -135,4 +137,3 @@ function updateTasks(nextTasks) {                       // every change to the l
 
 tasks = loadTasks();                                    // here it loads saved tasks first
 renderTasks();                                          // and that draws the list when the page opens
-
