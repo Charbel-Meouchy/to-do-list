@@ -109,3 +109,20 @@ function handleListClick(e) {                           // this func will run on
 }                                                       // every closing tag ends its function same for all other funcs
 
 list.addEventListener('click', handleListClick);        // this is one listener for all task buttons
+
+const STORAGE_KEY = 'tasks';                            // that is the name the data is saved under
+
+function saveTasks() {                                  // that saves the tasks to the browser
+  const json = JSON.stringify(tasks);                   // transform the array we filled into text
+  localStorage.setItem(STORAGE_KEY, json);              // and now stores the text under (tasks)
+}                                                       
+
+function loadTasks() {                                  // the goal of this function will be to read saved tasks back
+  const raw = localStorage.getItem(STORAGE_KEY);        // gets the saved text and null if there is none
+  try {                                                 
+    return JSON.parse(raw) || [];                       // transform the text into and array or if there is nothing to []
+  } catch (err) {                                       
+    console.warn('Bad saved data, starting fresh', err); //if the saved text is broken it will log the problem in the console
+    return [];                                          // and it will start with an empty list instead of crashing
+  }                                                     
+}                                                       
