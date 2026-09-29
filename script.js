@@ -1,3 +1,4 @@
+/* Here unlike html and css i will comment nearlu everyline since its the first time i use js i am learning it */
 /* document.querySelector finds the first element matching a CSS selector and when we say #task-form like in css
 we mean the element with id task-form with something new which is const which mean the name will always point
 to the same element*/ 
@@ -47,3 +48,38 @@ function renderTasks() {
 }                                                      
 
 renderTasks();                                         // and finally this draws the list when the page open
+
+function updateTasks(nextTasks) {                       // i named this update since everychange in the tasks will go through here
+  tasks = nextTasks;                                    // this replaces the old array with new updated one
+  renderTasks();                                        // draw the page again with the new changes
+}                                                       
+
+function addTask(title) {                               // adds a new task with the typed text like added a gym one it shows with the text gym
+  const newTask = {                                     // creating the new task object
+    id: `${Date.now()}`,                                // give id from the current time as a string
+    title: title,                                       // here is the text the user typed
+    done: false,                                        // here the goal is for tasks to start uncompleted wich will change the label of button above also
+  };                                                    
+  updateTasks([...tasks, newTask]);                     // here we are making a new array that has old and new tasks so for adding a task
+}                                                       
+
+function clearFeedback() {                              
+  feedback.textContent = '';                            // this clear the error message so the goal of the func is to remove the error states
+  input.classList.remove('invalid');                    // the will remove the red border set in css in case of errors
+}                                                     
+
+function handleSubmit(e) {                              // this function will run after the form is submitted
+  e.preventDefault();                                   // this prevent the page form reloading again
+  const title = input.value.trim();                     // what this does is that it will get the typed text without spaces
+  if (!title) {                                         
+    feedback.textContent = 'Please type a task first.'; // here if the text is empty it will show the error message
+    input.classList.add('invalid');                     // incase of invalid input this will ad the red border
+    return;                                             // end it here with an empty return since nothing should be added
+  }                                                     
+  clearFeedback();                                      // removes the old errors that were there
+  addTask(title);                                       // adds the task
+  input.value = '';                                     // clears the text box from the text
+}                                                       
+
+form.addEventListener('submit', handleSubmit);          // this will run handleSubmit when clicking Add or Enter(as requested in assignment)
+input.addEventListener('input', clearFeedback);         // clears the error as soon as the person type
