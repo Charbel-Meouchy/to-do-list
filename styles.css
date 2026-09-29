@@ -1,15 +1,15 @@
-/* same systeme for the comments here i will comment new/nonbasic stuff*/
+/* ===== Tokens (S6) ===== */
 :root {
-  --surface: #f5f6fa;   /* this is for the page background*/
-  --panel: #ffffff;     /* this for the cards and input */
-  --text: #1f2330;      /* the text of the body*/
-  --muted: #5f6675;     /* secondary text */
-  --border: #dde1ea;    /* lines of the cards */
-  --brand: #3b5bdb;     /* the main buttons this color */
+  --surface: #f5f6fa;   /* page background */
+  --panel: #ffffff;     /* cards, input */
+  --text: #1f2330;      /* body text */
+  --muted: #5f6675;     /* secondary + done text */
+  --border: #dde1ea;    /* card lines */
+  --brand: #3b5bdb;     /* main buttons */
   --success: #2f9e44;   /* done button hover */
-  --danger: #e03131;    /* for errors or delete i made them red to be careful before pressing*/
+  --danger: #e03131;    /* errors, delete */
 
-  --sp-1: 4px;          /* the spacing scale i used the same as last assignment*/
+  --sp-1: 4px;          /* spacing scale (S6) */
   --sp-2: 8px;
   --sp-3: 16px;
   --sp-4: 24px;
@@ -17,37 +17,38 @@
   --sp-6: 48px;
 
   --radius: 10px;
-  --font: system-ui, sans-serif;  /* also like always font and a fallback font in case it doesnt load or anything*/
+  --font: system-ui, sans-serif;  /* font + fallback (S3) */
 }
 
-
+/* ===== Base ===== */
 * {
-  box-sizing: border-box;  /* also like last assignment this means the width include border and the padding they are not added to it */
+  box-sizing: border-box;  /* width includes padding + border (S3) */
 }
 
 body {
-  margin: 0;               /* removing the browser default margin so i can fully control it */
+  margin: 0;               /* remove browser default margin */
   padding: var(--sp-5) var(--sp-3);
   font-family: var(--font);
   font-size: 1rem;
-  line-height: 1.5;        /* in the slides this is the recommended line height for body text so i used it */
+  line-height: 1.5;        /* body text 1.4–1.6 (S3) */
   color: var(--text);
   background: var(--surface);
 }
 
+/* ===== Layout ===== */
 body {
-  display: flex; /*create a flex container also done before*/
-  justify-content: center;   /* center it horizontally since main axix is horizontal which justify-content works on */
+  display: flex;
+  justify-content: center;   /* center the app horizontally (S4) */
 }
 
 .app {
-  flex: 0 1 560px;           /* this mean dont grow , can shrink and basis of 560px */
+  flex: 0 1 560px;           /* don't grow, may shrink, prefer 560px (S4) */
 }
 
 .app-header {
-  display: flex; /*same here*/
+  display: flex;
   align-items: center;
-  justify-content: space-between; /* standard design of the navbar */
+  justify-content: space-between; /* title left, counter right (S4 navbar) */
   gap: var(--sp-3);
   margin-bottom: var(--sp-4);
 }
@@ -55,7 +56,7 @@ body {
 .app-header h1 {
   margin: 0;
   font-size: 1.75rem;
-  line-height: 1.15;        
+  line-height: 1.15;         /* tight for headings (S3) */
 }
 
 .counter {
@@ -64,23 +65,23 @@ body {
   color: var(--muted);
 }
 
-/* styling the form */
+/* ===== Form ===== */
 .task-form {
   display: flex;
-  flex-direction: column;    /* setting the main axix to be the vertical one*/
+  flex-direction: column;    /* label above the row */
   gap: var(--sp-2);
 }
 
 .form-row {
-  display: flex;             /* with this the input and the button will be next to each others */
+  display: flex;             /* input and button side by side */
   gap: var(--sp-2);
 }
 
 .task-input {
-  flex: 1;                   /* which means flex 1 1 0 so fill leftover space */
-  min-width: 0;              /* lets it shrink */
+  flex: 1;                   /* fill leftover space (S4: flex 1 = 1 1 0) */
+  min-width: 0;              /* lets it shrink (S4 gotcha) */
   padding: var(--sp-2) var(--sp-3);
-  font-family: var(--font);  /* changing the font of the inputs so they don't be the same as page */
+  font-family: var(--font);  /* inputs don't use the page font by default */
   font-size: 1rem;
   color: var(--text);
   background: var(--panel);
@@ -99,21 +100,23 @@ body {
   border-radius: var(--radius);
 }
 
+/* ===== Feedback ===== */
 .feedback {
   margin: var(--sp-2) 0;
   font-size: 0.875rem;
   color: var(--danger);
 }
 
+/* ===== List ===== */
 .task-list {
   display: flex;
-  flex-direction: column;    /* did the main aziz the vert one so i can stack the tasks */
-  gap: var(--sp-2);          
+  flex-direction: column;    /* tasks stacked (S4) */
+  gap: var(--sp-2);          /* gap, not margins (S4) */
   margin: 0;
-  padding: 0;               
+  padding: 0;                /* remove list indent */
 }
 
-.task {                      /* designing the only link + something i noticed that when i made it flex container it removes the bullet alone and did some basic styling */
+.task {                      /* one <li>; display flex also removes the bullet */
   display: flex;
   align-items: center;
   gap: var(--sp-2);
@@ -124,19 +127,19 @@ body {
 }
 
 .task-title {
-  flex: 1;                 
+  flex: 1;                   /* takes the space, pushes buttons right */
   min-width: 0;
-  overflow-wrap: anywhere;
 }
 
-.done .task-title {          /* this is for the title inside the class */
-  text-decoration: line-through;  /* as mentioned in the instruction of the assignment u mentioned "Users can mark a task as complete/incomplete (visually distinct, e.g. strikethrough) 
-  so thats why i made some text with a line crossing them as completed*/
+.done .task-title {          /* title inside a task with class "done" (S3 descendant) */
+  text-decoration: line-through;  /* the exception: asked for in the assignment */
   color: var(--muted);
 }
 
-/* did the same look for those 2 buttons */
+/* both small buttons share this look */
 .toggle,
+.edit,
+.save,
 .delete {
   padding: var(--sp-1) var(--sp-2);
   font-family: var(--font);
@@ -154,24 +157,44 @@ body {
   color: var(--danger);
 }
 
+.edit,
+.save {
+  color: var(--brand);
+}
+
+.edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--sp-1) var(--sp-2);
+  font-family: var(--font);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--brand);
+  border-radius: var(--radius);
+}
+
 .empty-state {
   color: var(--muted);
 }
 
-.invalid {                   /* as i said in index.html js will handle the errors + the color i chose red since its a mistake it should be noticed */
+/* ===== Validation state ===== */
+.invalid {                   /* JS adds this; same specificity as .task-input but later in the file, so it wins (S3) */
   border-color: var(--danger);
-} 
+}
 
+/* ===== Hover + transitions (S6) ===== */
 .add {
-  transition: transform 180ms ease-out;  /* chose a duration in way like u said in class shouldnt be too slow so looks li laggy and not
-  too fast a good in between */
+  transition: transform 180ms ease-out;  /* property duration easing */
 }
 
 .add:hover {
-  transform: scale(1.04);    /* this means it will grow with transform not width */
+  transform: scale(1.04);    /* grow with transform, not width (S6) */
 }
 
 .toggle,
+.edit,
+.save,
 .delete {
   transition: background 180ms ease-out;
 }
@@ -186,8 +209,14 @@ body {
   background: var(--danger);
 }
 
-/* here prioritizing mobile first design then desktop */
-@media (min-width: 600px) { 
+.edit:hover,
+.save:hover {
+  color: white;
+  background: var(--brand);
+}
+
+/* ===== Larger screens, mobile-first (S5) ===== */
+@media (min-width: 600px) {
   body {
     padding: var(--sp-6) var(--sp-4);
   }
@@ -195,4 +224,4 @@ body {
   .app-header h1 {
     font-size: 2.25rem;
   }
-} 
+}
