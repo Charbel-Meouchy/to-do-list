@@ -137,7 +137,7 @@ body {
   color: var(--muted);
 }
 
-/* both small buttons share this look */
+/* all the small task buttons share this look */
 .toggle,
 .edit,
 .save,
