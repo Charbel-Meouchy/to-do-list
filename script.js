@@ -51,7 +51,7 @@ function renderTasks() {
     .map(taskToListItem)                               // turns each task into an <li>
     .forEach(li => list.append(li));                   // adds each <li> to the <ul>
   emptyState.textContent = tasks.length === 0          // checks if there are zero tasks to show the message i mentioned before that is underneath this line
-    ? 'No tasks yet — add your first one above.'       
+    ? 'No tasks yet , add your first one above.'       
     : '';   
     updateCounter();                                 // i added this at the end of the code which will refresh the timer                                           // and if not empty show nothing since there will be tasks
 }                                                      
