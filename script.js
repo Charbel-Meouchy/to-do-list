@@ -5,14 +5,14 @@ to the same element*/
 const form = document.querySelector('#task-form');         // finds the <form> by its id (task-form)
 const input = document.querySelector('#task-input');       // finds the text box
 const feedback = document.querySelector('#feedback');      // finds the <p> that hold the error messages that we made color red
-const list = document.querySelector('#task-list');         // finds the empty <ul> which i mentioned that has only 1 <li>
+const list = document.querySelector('#task-list');         // finds the empty <ul> which i mentioned that js will fill with the tasks
 const counter = document.querySelector('#counter');        // finds the <p> that has the counter "0 of 0 done" which i said js will handle it 
 const emptyState = document.querySelector('#empty-state'); // finds the <p> that has "No tasks yet" that appears when there is nothing and disappear later 
 let tasks = []; // empty array that will hold all task(in the format id title and done) objects and something important that i didnt put const since i will replace it with new one at each change
 let editingId = null;
 
 function taskToListItem(task) {                        
-  const li = document.createElement('li');             // creating a new link that isnt on the page yet
+  const li = document.createElement('li');             // creating a new list item (<li>) that isnt on the page yet
   li.classList.add('task');                            // giving it class to use it in css
   li.dataset.id = task.id;                             // i saved the task id on it as data-id
   if (task.done) {                                     
@@ -51,7 +51,7 @@ function taskToListItem(task) {
   li.append(editBtn);
   li.append(deleteBtn);                                // puting the Delete and Done button inside the <li>
   return li;                                           // gives the finished <li> back
-}                                                      // and thas closing tag puts an end to taskToListItem
+}                                                      // and thas closing brace puts an end to taskToListItem
 
 function updateCounter() {                              // this updates the -of- done text
   const doneCount = tasks.reduce(                       // this walk through the task to keep count
@@ -68,8 +68,8 @@ function renderTasks() {
     .forEach(li => list.append(li));                   // adds each <li> to the <ul>
   emptyState.textContent = tasks.length === 0          // checks if there are zero tasks to show the message i mentioned before that is underneath this line
     ? 'No tasks yet , add your first one above.'       
-    : '';   
-    updateCounter();                                 // i added this at the end of the code which will refresh the timer                                           // and if not empty show nothing since there will be tasks
+    : '';                                              // and if not empty show nothing since there will be tasks
+    updateCounter();                                 // i added this at the end of the code which will refresh the counter
 }                                                      
 
 function addTask(title) {                               // adds a new task with the typed text like added a gym one it shows with the text gym
@@ -88,7 +88,7 @@ function clearFeedback() {
 
 function handleSubmit(e) {                              // this function will run after the form is submitted
   e.preventDefault();                                   // this prevent the page form reloading again
-  const title = input.value.trim();                     // what this does is that it will get the typed text without spaces
+  const title = input.value.trim();                     // what this does is that it will get the typed text without the spaces at the start and end
   if (!title) {                                         
     feedback.textContent = 'Please type a task first.'; // here if the text is empty it will show the error message
     input.classList.add('invalid');                     // incase of invalid input this will ad the red border
@@ -104,7 +104,7 @@ input.addEventListener('input', clearFeedback);         // clears the error as s
 
 function toggleTask(id) {                               // changes the task from done to undone
   updateTasks(tasks.map(t =>                            // this will build a new array from every task
-    t.id === id                                         // this checks if it has been clicked yet or not
+    t.id === id                                         // this checks if this is the task that was clicked or not
       ? { ...t, done: !t.done }                         // if yes copy it with the done switched
       : t                                               // if no keep it as it is
   ));                                                   
@@ -118,6 +118,7 @@ function startEdit(id) {
   clearFeedback();
   editingId = id;
   renderTasks();
+  list.querySelector('.edit-input').focus() // now when the user click edit he can write immdialty without having to press again in the box
 }
 
 function cancelEdit() {
@@ -158,7 +159,7 @@ function handleListClick(e) {                           // this func will run on
   if (e.target.closest('.toggle')) {                    // here if the done or undo button was clicked it will flip the task with that id
     toggleTask(li.dataset.id);                          
   }                                                     
-}                                                       // every closing tag ends its function same for all other funcs
+}                                                       // every closing brace ends its function same for all other funcs
 
 list.addEventListener('click', handleListClick);        // this is one listener for all task buttons
 

@@ -129,6 +129,7 @@ body {
 .task-title {
   flex: 1;                   /* takes the space, pushes buttons right */
   min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .done .task-title {          /* title inside a task with class "done" (S3 descendant) */
