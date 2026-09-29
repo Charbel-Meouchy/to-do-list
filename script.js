@@ -83,3 +83,29 @@ function handleSubmit(e) {                              // this function will ru
 
 form.addEventListener('submit', handleSubmit);          // this will run handleSubmit when clicking Add or Enter(as requested in assignment)
 input.addEventListener('input', clearFeedback);         // clears the error as soon as the person type
+
+function toggleTask(id) {                               // changes the task from done to undone
+  updateTasks(tasks.map(t =>                            // this will build a new array from every task
+    t.id === id                                         // this checks if it has been clicked yet or not
+      ? { ...t, done: !t.done }                         // if yes copy it with the done switched
+      : t                                               // if no keep it as it is
+  ));                                                   
+}                                                       
+
+function deleteTask(id) {                               
+  updateTasks(tasks.filter(t => t.id !== id));          // this will keep everytask except the one the person clicked since it a delete function
+}                                                       
+
+function handleListClick(e) {                           // this func will run on any click inside the unoardered list
+  const li = e.target.closest('li');                    // find the <li> that was clicked 
+  if (!li) return;                                      // if the person clicked on an empty space do nothing (empty return like before)
+  if (e.target.closest('.delete')) {                    // if the delete button was clicked delete the task that has that id
+    deleteTask(li.dataset.id);                          
+    return;                                             // like before an empty return to stop
+  }                                                     
+  if (e.target.closest('.toggle')) {                    // here if the done or undo button was clicked it will flip the task with that id
+    toggleTask(li.dataset.id);                          
+  }                                                     
+}                                                       // every closing tag ends its function same for all other funcs
+
+list.addEventListener('click', handleListClick);        // this is one listener for all task buttons
